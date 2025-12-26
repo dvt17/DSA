@@ -3,7 +3,7 @@ Tìm các phần tử xuất hiện chung ở cả 2 mảng số nguyên A và B
 */
 #include <iostream>
 using namespace std;
-void eraseSimilar(int a[], int n){
+void eraseSimilar(int a[], int &n){
     for(int i = 0; i < n; i++){
         for(int j = i + 1; j < n; j++){
             if(a[i] == a[j]){
@@ -11,6 +11,7 @@ void eraseSimilar(int a[], int n){
                     a[k] = a[k + 1];
                 }
                 n--;
+                j--;
             } 
         }
     }
@@ -24,15 +25,13 @@ int main(){
     cout <<"Nhap mang a: \n";
     for(int i = 0; i < n; i++) cin >> a[i];
     eraseSimilar(a,n);
-
-    cout <<"Nhap so phan tu cho mang b: ";
+    cout <<"\nNhap so phan tu cho mang b: ";
     cin >> m;
     int b[m];
     cout <<"Nhap mang b: \n";
-    eraseSimilar(b,m);
     for(int i = 0; i < m; i++) cin >> b[i];
-    
-    cout << "Cac phan tu trung nhau la: \n";
+    eraseSimilar(b,m);
+    cout << "\nCac phan tu trung nhau la: \n";
     bool check = false;
     for(int i = 0; i < n; i++){
         for(int j = 0; j < m; j++){

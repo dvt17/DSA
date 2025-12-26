@@ -5,13 +5,17 @@ có sinh nhật vào tháng 7.
 */
 
 #include <iostream>
-#include <string>
+#include <string.h>
 #include <vector>
 using namespace std;
 
+struct Date{
+    int d,m,y;
+};
 struct SinhVien{
-    string mssv, hoTen;
-    int ngay, thang, nam;
+    char mssv[11];
+    char Ten[33];
+    Date SinhNhat;
 
 };
 
@@ -19,29 +23,34 @@ int main(){
     int n;
     cout << "Nhap so luong sinh vien: ";
     cin >> n;
-    vector<SinhVien> sv(n);
+    SinhVien s[n];
+
+    cout << "Nhap du lieu cho danh sach sinh vien:\n";
 
     for(int i = 0; i < n; i++){
-        cout << "\nNhap thong tin sinh vien " << i+1 << ":\n";
+        cout <<"Sinh vien thu " << i+1 << ": \n";
         cout << "MSSV: ";
-        cin >> sv[i].mssv;
         cin.ignore();
-        cout << "Ho ten: ";
-        getline(cin,sv[i].hoTen);
-        cout << "Ngay sinh(ngay,thang,nam): ";
-        cin >> sv[i].ngay >> sv[i].thang >> sv[i].nam;
+        cin.getline(s[i].mssv,11);
+        cout <<"Ho va ten: ";
+        cin.getline(s[i].Ten,33);
+        cout <<"Nhap ngay thang nam sinh(cach nhau boi dau cach): ";
+        cin >> s[i].SinhNhat.d >> s[i].SinhNhat.m >> s[i].SinhNhat.y;
     }
 
-    cout << "Danh sach sinh vien sinhvao thang 7:\n";
-    bool check = false;
-    for(const auto& it : sv){
-        if(it.thang == 7){
-            cout << "MSSV: " << it.mssv <<"\nHo ten: " << it.hoTen
-                <<"\nNgay sinh: " << it.ngay <<"/"<<it.thang<<"/"<<it.nam <<endl;
-            check = true;         
+    int dem = 0;
+    for(int i = 0; i < n; i++){
+        if(s[i].SinhNhat.m == 7){
+            if(dem==0){
+                cout << "Danh sach sinh vien sinhvao thang 7:\n";
+                cout << "STT\tMSSV\tHo va ten\tSinhNhat\n";
+            }
+            dem++;
+            cout << dem << "\t" << s[i].mssv <<"\t" << s[i].Ten
+                <<"\t" << s[i].SinhNhat.d <<"/"<<s[i].SinhNhat.m<"/"<<s[i].SinhNhat.y<<endl;       
         }
     } 
-    if(!check){
+    if(dem==0){
         cout << "Khong co sinh vien nao sinh vao thang 7" <<endl;
     }
 
